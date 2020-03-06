@@ -14,7 +14,6 @@ class Answer(db.Model):
     answer = db.Column(db.String(80))
 
 
-
 # Handle data array
 def data_handle(data):
     if data == '1':
@@ -37,16 +36,27 @@ def data_handle(data):
         cleaned_data = 'I'
     elif data == '10':
         cleaned_data = 'J'
+    elif data == '11':
+        cleaned_data = 'K'
+    elif data == '12':
+        cleaned_data = 'L'
+    elif data == '13':
+        cleaned_data = 'M'
+    elif data == '14':
+        cleaned_data = 'N'
+    elif data == '15':
+        cleaned_data = 'O'
     else:
         cleaned_data = 'None'
     return cleaned_data
 
-#xoa toan bo database
+
+# xoa toan bo database
 @app.route('/clear-data')
 def clear_data():
     try:
         db.drop_all()
-        db.create_all() # tao database moi
+        db.create_all()  # tao database moi
     except Exception as e:
         print(e)
     return redirect(url_for('index'))
