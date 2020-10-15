@@ -35,7 +35,7 @@ void post_request(String data) {
 
     HTTPClient http;    //Declare object of class HTTPClient
 
-    http.begin("http://171.247.191.234:5000/api_1_0/data");      //Specify request destination
+    http.begin("http://45.117.169.186:5000/api_1_0/data");      //Specify request destination
     http.addHeader("Content-Type", "text/plain");  //Specify content-type header
 
     int httpCode = http.POST(data);   //Send the request
@@ -55,13 +55,13 @@ void post_request(String data) {
 
 
 void vibrateShort() {
-  analogWrite(LED, 1023);
+  analogWrite(LED, 600);
   delay(200);
   analogWrite(LED, 0);
 }
 
 void vibrateLong() {
-  analogWrite(LED, 1023);
+  analogWrite(LED, 600);
   delay(700);
   analogWrite(LED, 0);
 }

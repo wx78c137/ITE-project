@@ -1,17 +1,39 @@
 from flask import Flask, jsonify, abort, request, json, render_template, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-import os
+from flask_mongoengine import MongoEngine
+import os, random, string
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
-db = SQLAlchemy(app)
+
+app.config['MONGODB_SETTINGS'] = {
+    'host': 'mongodb+srv://vuhoang17891:Vu1781991@cluster0.bknlw.mongodb.net/iteprojects?retryWrites=true&w=majority',
+}
+
+db = MongoEngine(app)
+
+class Result(db.Document):
+    seq = db.IntField()
+    result = db.StringField(max_length=50)
+    received = db.ListField()
 
 
-class Answer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    answer = db.Column(db.String(80))
+def fakeDb():
+    dropDatabase()
+    for i in range(40):
+        letters = string.ascii_lowercase
+        result_str = ''.join(random.choice(letters) for i in range(1))
+        seq = Result.objects.count()
+        seq = seq + 1
+        result =Result(result= result_str, seq= seq)
+        result.save()
+
+
+def dropDatabase():
+    tmp = Result.objects.all()
+    for t in tmp:
+        t.delete()
+        t.save()
 
 
 # Handle data array
@@ -55,13 +77,12 @@ def data_handle(data):
 @app.route('/clear-data')
 def clear_data():
     try:
-        db.drop_all()
-        db.create_all()  # tao database moi
+        dropDatabase()
     except Exception as e:
         print(e)
     return redirect(url_for('index'))
 
-
+#hàm xử lý khi máy phát gửi dữ liệu
 @app.route('/api_1_0/data', methods=['POST'])
 def data_access():
     if not request.data:  # neu khong co data
@@ -70,9 +91,10 @@ def data_access():
         raw_data = request.get_data(as_text=True)
     try:
         cleaned_data = data_handle(raw_data)
-        answer = Answer(answer=cleaned_data)
-        db.session.add(answer)
-        db.session.commit()
+        seq = Result.objects.count()
+        seq = seq + 1
+        result = Result(result=cleaned_data, seq = seq)
+        result.save()
         return_data = 'Post successfully'
     except Exception as e:
         print(e)
@@ -80,9 +102,35 @@ def data_access():
     return jsonify({'return_data': return_data})
 
 
+@app.route('/api_1_0/first_data', methods = ['POST'])
+def get_first_data():
+    if not request.values:  # neu khong co data
+        pass
+    else:
+        mac_address = request.values.get('mac_address')
+    result = Result.objects(received__ne = mac_address).first()
+    if result:
+        result.update(add_to_set__received = mac_address)
+        return jsonify({'return_data': {result.seq: result.result}})
+    else:
+        return jsonify({'return_data': 'Không có câu trả lời mới'})
+
+
+@app.route('/api_1_0/last_data', methods = ['POST'])
+def get_last_data():
+    if not request.values:  # neu khong co data
+        pass
+    else:
+        mac_address = request.values.get('mac_address')
+    result = Result.objects(received = mac_address).order_by('-id').first()
+    if result:
+        return jsonify({'return_data': {result.seq: result.result}})
+    else:
+        return jsonify({'return_data': 'Không có câu trả lời mới'})
+
 @app.route('/')
 def index():
-    answers = Answer.query.all()
+    answers = Result.objects.all()
     return render_template('index.html', answers=answers)
 
 
