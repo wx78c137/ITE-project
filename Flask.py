@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, abort, request, json, render_template, redirect, url_for
 from flask_mongoengine import MongoEngine
 import os, random, string
-from forms import editResult
 from mongoengine.queryset.visitor import Q
 
 basedir = os.path.abspath(os.path.dirname(__file__))
