@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, abort, request, json, render_template, redirect, url_for
 from flask_mongoengine import MongoEngine
 import os, random, string
+from forms import editResult
+from mongoengine.queryset.visitor import Q
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -30,10 +32,7 @@ def fakeDb():
 
 
 def dropDatabase():
-    tmp = Result.objects.all()
-    for t in tmp:
-        t.delete()
-        t.save()
+    Result.drop_collection()
 
 
 # Handle data array
@@ -108,25 +107,23 @@ def get_first_data():
         pass
     else:
         mac_address = request.values.get('mac_address')
-    result = Result.objects(received__ne = mac_address).first()
+    result = Result.objects(Q(received__ne = mac_address) & Q(result__ne = 'None')).first()
     if result:
         result.update(add_to_set__received = mac_address)
-        return jsonify({'return_data': {result.seq: result.result}})
+        return jsonify({'return_data': {'num':result.seq, 'result': result.result}})
     else:
-        return jsonify({'return_data': 'Không có câu trả lời mới'})
+        return jsonify({'return_data': {'num':0, 'result': 'None'}})
 
 
-@app.route('/api_1_0/last_data', methods = ['POST'])
-def get_last_data():
-    if not request.values:  # neu khong co data
-        pass
-    else:
-        mac_address = request.values.get('mac_address')
-    result = Result.objects(received = mac_address).order_by('-id').first()
-    if result:
-        return jsonify({'return_data': {result.seq: result.result}})
-    else:
-        return jsonify({'return_data': 'Không có câu trả lời mới'})
+
+@app.route('/edit/<id>', methods=['GET', 'POST'])
+def edit(id):
+    result = Result.objects.get(id=id)
+    print(result.result)
+    if request.method == 'POST':
+        result.result = request.form['result']
+        result.save()
+    return redirect(url_for('index'))
 
 @app.route('/')
 def index():

@@ -3,7 +3,3 @@
         $(document.body).html(data);
     });
 }
-$(function() {
-    setTimeout(startRefresh,10000);
-});
-

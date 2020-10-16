@@ -12,39 +12,23 @@
 </head>
 
 <body>
-  <div class="container">
 
-
-    <h2 class="banner">ITE Project</h2>
-
-    <table>
-      <tr>
-        <th>Số thứ tự</th>
-        <th>Câu trả lời</th>
-        <th></th>
-      </tr>
-      {% for answer in answers %}
-      <tr>
-        <td>{{answer.seq}}</td>
-        <div class="pagination-centered">
-          <td>{{answer.result}}</td>
-        </div>
-        <td>
-          <form class="form-inline float-right" action="/edit/{{answer.id}}" method="post">
-            <div class="form-group">
-              <input class="form-control" name="result" aria-describedby="emailHelp" placeholder="Điền đáp án câu {{answer.seq}}" required>
-            </div>
-            <button type="submit" class="btn btn-outline-secondary" style="margin-left: 10px">Xác nhận</button>
-          </form>
-        </td>
-
-      </tr>
-      {% endfor %}
-    </table>
-    <div class="clear-data">
-      <a href="/clear-data" class="btn btn-outline-danger">Clear Data</a>
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-  </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
