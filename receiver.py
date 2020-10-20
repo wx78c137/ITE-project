@@ -6,7 +6,7 @@ from gtts import gTTS
 tmpNum = 0
 
 GPIO.setwarnings(False) # Ignore warning for now
-GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+GPIO.setmode(GPIO.BCM) # Use physical pin numbering
 GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
