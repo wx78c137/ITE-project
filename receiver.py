@@ -24,10 +24,10 @@ def userChoice():
                 result = return_data.get('result')
                 text = 'Câu ' + str(num) + ': ' + result
                 playViLanguage(text)
-                tmpNum = num
+                tmpNum = text
         if GPIO.input(18) == False:
             if tmpNum == '':
-                playViLanguage('No answer yet')
+                playViLanguage('Chưa có câu trả lời mới')
             else:
                 print(tmpNum)
                 #playViLanguage(tmpNum)
