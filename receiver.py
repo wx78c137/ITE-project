@@ -13,7 +13,7 @@ def userChoice():
     global tmpNum
     mac_address = get_mac()
     while 1:
-        B23.when_pressed = b23Pressed
+        B23.when_pressed = b23Pressed(mac_address)
         B18.when_pressed = b18Pressed
 
 def playViLanguage(text):
@@ -22,7 +22,7 @@ def playViLanguage(text):
     os.system("mpg321 tmp.mp3")
 
 
-def b23Pressed():
+def b23Pressed(mac_address):
     postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
