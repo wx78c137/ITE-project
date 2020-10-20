@@ -27,7 +27,7 @@ def userChoice():
                 tmpNum = num
         if GPIO.input(18) == False:
             if tmpNum == '':
-                playResult('No answer yet')
+                playViLanguage('No answer yet')
             else:
                 print(tmpNum)
                 #playViLanguage(tmpNum)
