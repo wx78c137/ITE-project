@@ -1,18 +1,20 @@
 import requests, os
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 from uuid import getnode as get_mac
 from gtts import gTTS
+
 tmpNum = 0
+
+GPIO.setwarnings(False) # Ignore warning for now
+GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
 def userChoice():
     global tmpNum
     mac_address = get_mac()
-    print(mac_address)
     while 1:
-        print('Chọn lệnh:')
-        print('1. Lấy đáp án kế tiếp')
-        print('2. Lấy lại đáp án cũ')
-        print('Nhấn Ctrl + D để thoát')
-        choice = input('Lựa chọn: ')
-        if choice == '1':
+        if GPIO.input(5) == GPIO.HIGH:
             postRequest = requests.post('http://127.0.0.1:5000/api_1_0/first_data', data = {'mac_address':mac_address})
             return_data = postRequest.json().get('return_data')
             num = return_data.get('num')
@@ -24,7 +26,7 @@ def userChoice():
                 playResultNum(num)
                 playResult(result)
                 tmpNum = num
-        if choice == '2':
+        if GPIO.input(6) == GPIO.HIGH:
             if tmpNum == 0:
                 playResult('No answer yet')
             else:
