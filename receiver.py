@@ -45,4 +45,7 @@ def b2Pressed():
         os.system("mpg321 tmp.mp3")
 
 if __name__ == '__main__':
-    userChoice()
+    try:
+        userChoice()
+    except Exception as e:
+        print(e)
