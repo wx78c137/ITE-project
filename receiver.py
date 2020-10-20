@@ -31,12 +31,14 @@ def userChoice():
                 playResult('No answer yet')
             else:
                 playResultNum(tmpNum)
-                os.system("mpg321 tmp.mp3")
+                os.system("mpg321 tmp2.mp3")
 
 
 def playResultNum(num):
-    path = 'mpg321' + ' /home/pi/myProjects/ITE-project/voiceGTTS/Câu\ ' + str(num) + '.mp3'
-    os.system(path)
+    text = 'Câu '+ str(num)
+    tts = gTTS(text=text, lang='vn')
+    tts.save("tmp2.mp3")
+    os.system("mpg321 tmp2.mp3")
 
 
 def playResult(result):
