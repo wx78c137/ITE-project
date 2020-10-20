@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 from uuid import getnode as get_mac
 from gtts import gTTS
 from gpiozero import Button
+from signal import pause
 
 tmpNum = ''
 
@@ -12,9 +13,10 @@ B18 = Button(18)
 def userChoice():
     global tmpNum
     mac_address = get_mac()
-    while 1:
-        B23.when_pressed = b23Pressed(mac_address)
-        B18.when_pressed = b18Pressed
+    B23.when_pressed = b23Pressed(mac_address)
+    pause()
+    B18.when_pressed = b18Pressed
+    pause()
 
 def playViLanguage(text):
     tts = gTTS(text=text, lang='vi')
