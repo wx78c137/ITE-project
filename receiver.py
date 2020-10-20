@@ -12,8 +12,9 @@ B18 = Button(18)
 def userChoice():
     global tmpNum
     mac_address = get_mac()
-    B23.when_pressed = b23Pressed
-    B18.when_pressed = b18Pressed
+    while 1:
+        B23.when_pressed = b23Pressed
+        B18.when_pressed = b18Pressed
 
 def playViLanguage(text):
     tts = gTTS(text=text, lang='vi')
