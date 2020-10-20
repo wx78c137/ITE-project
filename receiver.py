@@ -29,7 +29,8 @@ def userChoice():
             if tmpNum == '':
                 playResult('No answer yet')
             else:
-                playViLanguage(tmpNum)
+                print(tmpNum)
+                #playViLanguage(tmpNum)
 
 def playViLanguage(text):
     tts = gTTS(text=text, lang='vi')
