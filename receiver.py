@@ -14,9 +14,9 @@ def userChoice():
     global tmpNum
     mac_address = get_mac()
     while 1:
-        if(button1.when_pressed == True):
+        if button1.is_pressed == True:
             b1Pressed(mac_address)
-        elif(button2.when_pressed == True):
+        elif button2.is_pressed == True:
             b2Pressed()
 
 def playViLanguage(text):
