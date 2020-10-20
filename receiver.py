@@ -14,24 +14,22 @@ def userChoice():
     global tmpNum
     mac_address = get_mac()
     while 1:
-        if GPIO.input(23) == False:
-            if GPIO.input(23) == True:
-                postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
-                return_data = postRequest.json().get('return_data')
-                num = return_data.get('num')
-                if num == 0:
-                    playResult('No answer yet')
-                else:
-                    result = return_data.get('result')
-                    text = 'Câu ' + str(num) + ': ' + result
-                    playViLanguage(text)
-                    tmpNum = text
+        GPIO.wait_for_edge(23, GPIO.FALLING)
+        postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
+        return_data = postRequest.json().get('return_data')
+        num = return_data.get('num')
+        if num == 0:
+            playResult('No answer yet')
+        else:
+            result = return_data.get('result')
+            text = 'Câu ' + str(num) + ': ' + result
+            playViLanguage(text)
+            tmpNum = text
         if GPIO.input(18) == False:
-            if GPIO.input(23) == True:
-                if tmpNum == '':
-                    playViLanguage('Chưa có câu trả lời mới')
-                else:
-                    playViLanguage(tmpNum)
+            if tmpNum == '':
+                playViLanguage('Chưa có câu trả lời mới')
+            else:
+                playViLanguage(tmpNum)
 
 def playViLanguage(text):
     tts = gTTS(text=text, lang='vi')
