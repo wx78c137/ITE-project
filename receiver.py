@@ -30,7 +30,7 @@ def b1Pressed(mac_address):
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
     if num == 0:
-        playResult('Chưa có câu trả lời mới')
+        playViLanguage('Chưa có câu trả lời mới')
     else:
         result = return_data.get('result')
         text = 'Câu ' + str(num) + ': ' + result
