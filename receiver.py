@@ -15,7 +15,7 @@ def userChoice():
     mac_address = get_mac()
     while 1:
         if GPIO.input(5) == GPIO.HIGH:
-            postRequest = requests.post('http://127.0.0.1:5000/api_1_0/first_data', data = {'mac_address':mac_address})
+            postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
             return_data = postRequest.json().get('return_data')
             num = return_data.get('num')
             print(num)
