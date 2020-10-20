@@ -11,7 +11,6 @@ button1 = Button(23)
 button2 = Button(18)
 
 def userChoice():
-    global tmpNum
     mac_address = get_mac()
     while 1:
         if button1.is_pressed == True:
@@ -26,6 +25,7 @@ def playViLanguage(text):
 
 
 def b1Pressed(mac_address):
+    global tmpNum
     postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
