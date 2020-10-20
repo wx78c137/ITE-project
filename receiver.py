@@ -35,7 +35,7 @@ def userChoice():
 
 
 def playResultNum(num):
-    path = 'mpg321' + 'voiceGTTS/Câu\ ' + str(num) + '.mp3'
+    path = 'mpg321' + '/home/pi/myProjects/ITE-project/voiceGTTS/Câu\ ' + str(num) + '.mp3'
     os.system(path)
 
 
