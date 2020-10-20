@@ -31,7 +31,6 @@ def userChoice():
                 playResult('No answer yet')
             else:
                 playResultNum(tmpNum)
-                os.system("mpg321 tmp2.mp3")
                 os.system("mpg321 tmp.mp3")
 
 
