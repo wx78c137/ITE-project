@@ -7,16 +7,17 @@ from signal import pause
 
 tmpNum = ''
 
-B23 = Button(23)
-B18 = Button(18)
+button1 = Button(23)
+button2 = Button(18)
 
 def userChoice():
     global tmpNum
     mac_address = get_mac()
-    B23.when_pressed = b23Pressed(mac_address)
-    pause()
-    B18.when_pressed = b18Pressed
-    pause()
+    while 1:
+        if(button1.when_pressed == True):
+            b1Pressed(mac_address)
+        elif(button2.when_pressed == True):
+            b2Pressed()
 
 def playViLanguage(text):
     tts = gTTS(text=text, lang='vi')
@@ -24,7 +25,7 @@ def playViLanguage(text):
     os.system("mpg321 tmp.mp3")
 
 
-def b23Pressed(mac_address):
+def b1Pressed(mac_address):
     postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
@@ -37,7 +38,7 @@ def b23Pressed(mac_address):
         tmpNum = text
 
 
-def b18Pressed():
+def b2Pressed():
     if tmpNum == '':
         playViLanguage('Chưa có câu trả lời mới')
     else:
