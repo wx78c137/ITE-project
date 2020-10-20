@@ -36,7 +36,7 @@ def userChoice():
 
 def playResultNum(num):
     text = 'Câu '+ str(num)
-    tts = gTTS(text=text, lang='vn')
+    tts = gTTS(text=text, lang='vi')
     tts.save("tmp2.mp3")
     os.system("mpg321 tmp2.mp3")
 
