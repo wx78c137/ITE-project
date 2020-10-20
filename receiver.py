@@ -31,20 +31,20 @@ def userChoice():
                 playResult('No answer yet')
             else:
                 playResultNum(tmpNum)
-                os.system("mpg321 tmp.mp3")
+                os.system("omxplayer tmp.mp3")
 
 
 def playResultNum(num):
     text = 'Câu '+ str(num)
     tts = gTTS(text=text, lang='vi')
     tts.save("tmp2.mp3")
-    os.system("mpg321 tmp2.mp3")
+    os.system("omxplayer tmp2.mp3")
 
 
 def playResult(result):
     tts = gTTS(text=result, lang='en')
     tts.save("tmp.mp3")
-    os.system("mpg321 tmp.mp3")
+    os.system("omxplayer tmp.mp3")
 
 
 if __name__ == '__main__':
