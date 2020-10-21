@@ -7,9 +7,15 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 
+#app.config['MONGODB_SETTINGS'] = {
+#    'host': 'mongodb+srv://vuhoang17891:Vu1781991@cluster0.bknlw.mongodb.net/iteprojects?retryWrites=true&w=majority',
+#}
 app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb+srv://vuhoang17891:Vu1781991@cluster0.bknlw.mongodb.net/iteprojects?retryWrites=true&w=majority',
+    'db': 'iteprojects',
+    'host': '127.0.0.1',
+    'port': 27017
 }
+
 
 db = MongoEngine(app)
 
@@ -21,9 +27,10 @@ class Result(db.Document):
 
 def fakeDb():
     dropDatabase()
+    words = ["Stack", "Overflow", "rocks", 'print', 'Generation, Thế hệ', 'Home, ngôi nhà', 'horse, con ngựa', 'dog, con chó', 'Anh', 'Bê Bò', 'Chó','Dê','Em', 'F', 'Gà', 'Door, cánh cửa', 'pillow, cái gối', 'coffee, cà phê', 'pencil, cây bút chì','mobile phone, điện thoại di động']
     for i in range(40):
         letters = string.ascii_lowercase
-        result_str = ''.join(random.choice(letters) for i in range(1))
+        result_str = random.choice(words)
         seq = Result.objects.count()
         seq = seq + 1
         result =Result(result= result_str, seq= seq)
