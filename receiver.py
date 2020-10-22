@@ -11,6 +11,7 @@ button1 = Button(21)
 button2 = Button(20)
 
 def userChoice():
+    print('program start')
     mac_address = get_mac()
     while 1:
         if button1.is_pressed == True:
@@ -19,15 +20,18 @@ def userChoice():
             b2Pressed()
 
 def playViLanguage(text):
+    print('making request to gTTS')
     tts = gTTS(text=text, lang='vi')
     tts.save("tmp.mp3")
     os.system("mpg321 tmp.mp3")
+    print('end gTTS')
 
 
 def b1Pressed(mac_address):
-    print("\a")
     global tmpNum
+    print('making request to server')
     postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
+    print('end server request')
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
     if num == 0:
@@ -40,7 +44,6 @@ def b1Pressed(mac_address):
 
 
 def b2Pressed():
-    print("\a")
     if tmpNum == '':
         playViLanguage('Chưa có câu trả lời mới')
     else:
