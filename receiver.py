@@ -8,7 +8,7 @@ from signal import pause
 tmpNum = ''
 
 button1 = Button(21)
-button2 = Button(22)
+button2 = Button(20)
 
 def userChoice():
     mac_address = get_mac()
