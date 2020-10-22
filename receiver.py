@@ -25,6 +25,7 @@ def playViLanguage(text):
 
 
 def b1Pressed(mac_address):
+    print("\a")
     global tmpNum
     postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
     return_data = postRequest.json().get('return_data')
@@ -39,6 +40,7 @@ def b1Pressed(mac_address):
 
 
 def b2Pressed():
+    print("\a")
     if tmpNum == '':
         playViLanguage('Chưa có câu trả lời mới')
     else:
