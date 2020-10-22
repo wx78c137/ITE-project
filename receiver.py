@@ -22,9 +22,9 @@ def userChoice():
 def playViLanguage(text):
     print('making request to gTTS')
     tts = gTTS(text=text, lang='vi')
+    print('end gTTS')
     tts.save("tmp.mp3")
     os.system("mpg321 tmp.mp3")
-    print('end gTTS')
 
 
 def b1Pressed(mac_address):
