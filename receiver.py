@@ -55,9 +55,9 @@ def b2Pressed():
 
 
 def buzzerOn():
-    buzzer.on
+    buzzer.on()
     sleep(0.5)
-    buzzer.off
+    buzzer.off()
 
 if __name__ == '__main__':
     try:
