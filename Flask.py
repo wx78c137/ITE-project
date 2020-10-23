@@ -44,23 +44,23 @@ def dropDatabase():
 # Handle data array
 def data_handle(data):
     if data == '1':
-        cleaned_data = 'A'
+        cleaned_data = 'Anh'
     elif data == '2':
-        cleaned_data = 'B'
+        cleaned_data = 'Bò'
     elif data == '3':
-        cleaned_data = 'C'
+        cleaned_data = 'Chó'
     elif data == '4':
-        cleaned_data = 'D'
+        cleaned_data = 'Dê'
     elif data == '5':
-        cleaned_data = 'E'
+        cleaned_data = 'Em'
     elif data == '6':
         cleaned_data = 'F'
     elif data == '7':
-        cleaned_data = 'G'
+        cleaned_data = 'Gà'
     elif data == '8':
-        cleaned_data = 'H'
+        cleaned_data = 'Heo'
     elif data == '9':
-        cleaned_data = 'I'
+        cleaned_data = 'I ngắn'
     elif data == '10':
         cleaned_data = 'J'
     elif data == '11':

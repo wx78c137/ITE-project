@@ -2,13 +2,15 @@ import requests, os
 import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 from uuid import getnode as get_mac
 from gtts import gTTS
-from gpiozero import Button
+from gpiozero import Button, LED
 from signal import pause
+from time import sleep
 
 tmpNum = ''
 
 button1 = Button(21)
 button2 = Button(20)
+buzzer = LED(16)
 
 def userChoice():
     print('program start')
@@ -28,6 +30,7 @@ def playViLanguage(text):
 
 
 def b1Pressed(mac_address):
+    buzzerOn()
     global tmpNum
     print('making request to server')
     postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
@@ -44,13 +47,21 @@ def b1Pressed(mac_address):
 
 
 def b2Pressed():
+    buzzerOn()
     if tmpNum == '':
         playViLanguage('Chưa có câu trả lời mới')
     else:
         os.system("mpg321 tmp.mp3")
 
+
+def buzzerOn():
+    buzzer.on
+    sleep(0.5)
+    buzzer.off
+
 if __name__ == '__main__':
     try:
+        buzzerOn()
         userChoice()
     except Exception as e:
         print(e)
