@@ -21,7 +21,7 @@ db = MongoEngine(app)
 
 class Result(db.Document):
     seq = db.IntField()
-    result = db.StringField(max_length=50)
+    result = db.StringField()
     received = db.ListField()
 
 

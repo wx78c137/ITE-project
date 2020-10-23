@@ -21,6 +21,7 @@
       <tr>
         <th>Số thứ tự</th>
         <th>Câu trả lời</th>
+        <th>Máy đã nhận</th>
         <th></th>
       </tr>
       {% for answer in answers %}
@@ -29,6 +30,11 @@
         <div class="pagination-centered">
           <td>{{answer.result}}</td>
         </div>
+        <td>
+          {% for receiver in answer.received %}
+          {{ receiver }}
+          {% endfor %}
+        </td>
         <td>
           <form class="form-inline float-right" action="/edit/{{answer.id}}" method="post">
             <div class="form-group">
