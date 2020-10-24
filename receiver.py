@@ -17,16 +17,18 @@ def set_t1():
     print('set t1')
     global t1
     t1 = datetime.now()
+    print(t1)
 
 def set_t2():
     print('set t2')
     global t2
     t2 = datetime.now()
-
+    print(t2)
 def countDelta():
     global t1, t2
     mac_address = get_mac()
     delta = t2 - t1
+    print(delta)
     delsec = delta.total_seconds()
     if 0.2 < delsec < 2:
         getNewResult(mac_address)
