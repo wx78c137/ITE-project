@@ -43,6 +43,7 @@ def countDelta():
 
 def userChoice():
     print('program start')
+    sleep(5)
     os.system("mpg321 /home/pi/myProjects/ITE-project/start.mp3")
     mac_address = get_mac()
     while 1:
