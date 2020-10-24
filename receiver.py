@@ -27,7 +27,7 @@ def countDelta():
     global t1, t2
     mac_address = get_mac()
     delta = t2 - t1
-    delsec = delta.total_second()
+    delsec = delta.total_seconds()
     if 0.2 < delsec < 2:
         getNewResult(mac_address)
     else:
