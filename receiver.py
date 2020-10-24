@@ -5,21 +5,42 @@ from gtts import gTTS
 from gpiozero import Button, LED
 from signal import pause
 from time import sleep
+from datetime import datetime
 
 tmpNum = ''
-
+t1 = 0
+t2 = 0
 button1 = Button(21)
 button2 = Button(20)
 buzzer = LED(16)
+def set_t1():
+    global t1
+    t1 = datetime.now()
+
+def set_t2():
+    global t2
+    t2 = datetime.now()
+
+def countDelta():
+    global t1, t2
+    mac_address = get_mac()
+    delta = t2 - t1
+    delsec = delta.total_second()
+    if 0.2 < delsec < 2:
+        getNewResult(mac_address)
+    else:
+        getOldResult()
+    t1=0
+    t2=0
+
 
 def userChoice():
     print('program start')
     mac_address = get_mac()
     while 1:
-        if button1.is_pressed == True:
-            b1Pressed(mac_address)
-        elif button2.is_pressed == True:
-            b2Pressed()
+        button1.when_pressed = set_t1
+        button1.when_released = set_t2
+
 
 def playViLanguage(text):
     print('making request to gTTS')
@@ -29,7 +50,7 @@ def playViLanguage(text):
     os.system("mpg321 tmp.mp3")
 
 
-def b1Pressed(mac_address):
+def getNewResult(mac_address):
     buzzerOn()
     global tmpNum
     print('making request to server')
@@ -46,7 +67,7 @@ def b1Pressed(mac_address):
         tmpNum = text
 
 
-def b2Pressed():
+def getOldResult():
     buzzerOn()
     if tmpNum == '':
         playViLanguage('Chưa có câu trả lời mới')
