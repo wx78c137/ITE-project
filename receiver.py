@@ -24,6 +24,9 @@ def set_t2():
     global t2
     t2 = datetime.now()
     print(t2)
+    countDelta()
+
+
 def countDelta():
     global t1, t2
     mac_address = get_mac()
@@ -44,7 +47,7 @@ def userChoice():
     while 1:
         button1.when_pressed = set_t1
         button1.when_released = set_t2
-        countDelta()
+
 
 
 def playViLanguage(text):
