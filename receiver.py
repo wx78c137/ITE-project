@@ -14,10 +14,12 @@ button1 = Button(21)
 button2 = Button(20)
 buzzer = LED(16)
 def set_t1():
+    print('set t1')
     global t1
     t1 = datetime.now()
 
 def set_t2():
+    print('set t2')
     global t2
     t2 = datetime.now()
 
