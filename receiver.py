@@ -42,6 +42,7 @@ def userChoice():
     while 1:
         button1.when_pressed = set_t1
         button1.when_released = set_t2
+        countDelta()
 
 
 def playViLanguage(text):
