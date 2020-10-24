@@ -33,7 +33,7 @@ def b1Pressed(mac_address):
     buzzerOn()
     global tmpNum
     print('making request to server')
-    postRequest = requests.post('http://45.117.169.186:8000/api_1_0/first_data', data = {'mac_address':mac_address})
+    postRequest = requests.post('http://45.117.169.186:5000/api_1_0/first_data', data = {'mac_address':mac_address})
     print('end server request')
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
