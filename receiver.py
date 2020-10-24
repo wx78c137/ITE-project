@@ -33,7 +33,7 @@ def countDelta():
     delta = t2 - t1
     print(delta)
     delsec = delta.total_seconds()
-    if 0.2 < delsec < 2:
+    if delsec < 2:
         getNewResult(mac_address)
     else:
         getOldResult()
