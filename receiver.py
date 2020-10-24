@@ -43,6 +43,7 @@ def countDelta():
 
 def userChoice():
     print('program start')
+    os.system("mpg321 /home/pi/myProjects/ITE-project/start.mp3")
     mac_address = get_mac()
     while 1:
         button1.when_pressed = set_t1
@@ -67,7 +68,7 @@ def getNewResult(mac_address):
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
     if num == 0:
-        playViLanguage('Chưa có câu trả lời mới')
+        os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
         result = return_data.get('result')
         text = 'Câu ' + str(num) + ': ' + result
@@ -78,7 +79,7 @@ def getNewResult(mac_address):
 def getOldResult():
     buzzerOn()
     if tmpNum == '':
-        playViLanguage('Chưa có câu trả lời mới')
+        os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
         os.system("mpg321 tmp.mp3")
 
