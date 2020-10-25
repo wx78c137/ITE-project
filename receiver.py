@@ -77,6 +77,7 @@ def getNewResult(mac_address):
     elif link:
         os.system("mpg321 http://45.117.169.186:5000" + link)
         current_link = link
+        tmpNum = str(num)
     else:
         result = return_data.get('result')
         text = 'Câu ' + str(num) + ': ' + result
