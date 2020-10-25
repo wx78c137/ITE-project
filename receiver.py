@@ -58,8 +58,8 @@ def playViLanguage(text, num):
     os.system("mpg321 /home/pi/myProjects/ITE-project/loading.mp3")
     tts = gTTS(text=text, lang='vi')
     print('end gTTS')
-    tts.save('/tmp/cau-'+ str(num) + '.mp3')
-    os.system("mpg321 /tmp/cau-" + str(num) + '.mp3' )
+    tts.save('/home/pi/cau-'+ str(num) + '.mp3')
+    os.system("mpg321 /home/pi/cau-" + str(num) + '.mp3' )
 
 
 def getNewResult(mac_address):
@@ -74,7 +74,7 @@ def getNewResult(mac_address):
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     elif link:
         r = requests.get('http://45.117.169.186:5000' + link)
-        path = '/tmp/cau-' + str(num) + '.mp3'
+        path = '/home/pi/cau-' + str(num) + '.mp3'
         with open(path, 'wb') as f:
             f.write(r.content)
         os.system(path)
@@ -90,7 +90,7 @@ def getOldResult():
     if tmpNum == '':
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
-        os.system("mpg321 /tmp/cau-" +str(tmpNum) + '.mp3')
+        os.system("mpg321 /home/pi/cau-" +str(tmpNum) + '.mp3')
 
 
 def buzzerOn():
