@@ -29,7 +29,7 @@ class Result(db.Document):
 
 def fakeDb():
     dropDatabase()
-    words = ["Stack", "Overflow", "rocks", 'print', 'Generation, Thế hệ', 'Home, ngôi nhà', 'horse, con ngựa', 'dog, con chó', 'Anh', 'Bê Bò', 'Chó','Dê','Em', 'F', 'Gà', 'Door, cánh cửa', 'pillow, cái gối', 'coffee, cà phê', 'pencil, cây bút chì','mobile phone, điện thoại di động']
+    words = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','None']
     for i in range(40):
         letters = string.ascii_lowercase
         result_str = random.choice(words)
@@ -46,23 +46,23 @@ def dropDatabase():
 # Handle data array
 def data_handle(data):
     if data == '1':
-        cleaned_data = 'Anh'
+        cleaned_data = 'A'
     elif data == '2':
-        cleaned_data = 'Bò'
+        cleaned_data = 'B'
     elif data == '3':
-        cleaned_data = 'Chó'
+        cleaned_data = 'C'
     elif data == '4':
-        cleaned_data = 'Dê'
+        cleaned_data = 'D'
     elif data == '5':
-        cleaned_data = 'Em'
+        cleaned_data = 'E'
     elif data == '6':
         cleaned_data = 'F'
     elif data == '7':
-        cleaned_data = 'Gà'
+        cleaned_data = 'G'
     elif data == '8':
-        cleaned_data = 'Heo'
+        cleaned_data = 'H'
     elif data == '9':
-        cleaned_data = 'I ngắn'
+        cleaned_data = 'I'
     elif data == '10':
         cleaned_data = 'J'
     elif data == '11':
@@ -121,7 +121,6 @@ def get_first_data():
         return jsonify({'return_data': {'num':result.seq, 'result': result.result, 'link': result.link}})
     else:
         return jsonify({'return_data': {'num':0, 'result': 'None'}})
-
 
 
 @app.route('/edit/<id>', methods=['GET', 'POST'])
