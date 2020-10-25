@@ -73,7 +73,7 @@ def getNewResult(mac_address):
     if num == 0:
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     elif link:
-        r = requests.get(link)
+        r = requests.get('http://45.117.169.186:5000' + link)
         path = '/tmp/cau-' + str(num) + '.mp3'
         with open(path, 'wb') as f:
             f.write(r.content)
