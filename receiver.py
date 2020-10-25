@@ -73,7 +73,7 @@ def getNewResult(mac_address):
     if num == 0:
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     elif link:
-        os.system('aria2c http://45.117.169.186:5000' + link + ' -o ~/')
+        os.system('aria2c -o ~/ http://45.117.169.186:5000' + link)
         path = '/home/pi/cau-' + str(num) + '.mp3'
         os.system('mpg321 '+ path)
         tmpNum = str(num)
