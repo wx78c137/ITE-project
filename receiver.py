@@ -53,13 +53,13 @@ def userChoice():
 
 
 
-def playViLanguage(text):
+def playViLanguage(text, num):
     print('making request to gTTS')
     os.system("mpg321 /home/pi/myProjects/ITE-project/loading.mp3")
     tts = gTTS(text=text, lang='vi')
     print('end gTTS')
-    tts.save("tmp.mp3")
-    os.system("mpg321 tmp.mp3")
+    tts.save('/tmp/cau-'+ str(num) + '.mp3')
+    os.system("mpg321 /tmp/cau-" + str(num) + '.mp3' )
 
 
 def getNewResult(mac_address):
@@ -69,20 +69,28 @@ def getNewResult(mac_address):
     print('end server request')
     return_data = postRequest.json().get('return_data')
     num = return_data.get('num')
+    link = return_data.get('link')
     if num == 0:
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
+    elif link:
+        r = requests.get(link)
+        path = '/tmp/cau-' + str(num) + '.mp3'
+        with open(path, 'wb') as f:
+            f.write(r.content)
+        os.system(path)
+        tmpNum = str(num)
     else:
         result = return_data.get('result')
         text = 'Câu ' + str(num) + ': ' + result
-        playViLanguage(text)
-        tmpNum = text
+        playViLanguage(text, num)
+        tmpNum = str(num)
 
 
 def getOldResult():
     if tmpNum == '':
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
-        os.system("mpg321 tmp.mp3")
+        os.system("mpg321 /tmp/cau-" +str(tmpNum) + '.mp3')
 
 
 def buzzerOn():

@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, abort, request, json, render_template, redirect, url_for
+from flask import Flask, jsonify, abort, request, json, render_template, redirect, url_for, send_file
 from flask_mongoengine import MongoEngine
 import os, random, string
 from mongoengine.queryset.visitor import Q
+from gtts import gTTS
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -23,6 +24,7 @@ class Result(db.Document):
     seq = db.IntField()
     result = db.StringField()
     received = db.ListField()
+    link = db.StringField()
 
 
 def fakeDb():
@@ -116,7 +118,7 @@ def get_first_data():
     result = Result.objects(Q(received__ne = mac_address) & Q(result__ne = 'None')).first()
     if result:
         result.update(add_to_set__received = mac_address)
-        return jsonify({'return_data': {'num':result.seq, 'result': result.result}})
+        return jsonify({'return_data': {'num':result.seq, 'result': result.result, 'link': result.link}})
     else:
         return jsonify({'return_data': {'num':0, 'result': 'None'}})
 
@@ -128,8 +130,20 @@ def edit(id):
     print(result.result)
     if request.method == 'POST':
         result.result = request.form['result']
+        link = '/mp3/'+ str(result.seq)
+        result.link = link
         result.save()
+        text = 'câu ' + str(result.seq) + ' ' + result.result
+        name = '/tmp/cau-' + str(result.seq) +'.mp3'
+        tts = gTTS(text=text, lang='vi')
+        tts.save(name)
     return redirect(url_for('index'))
+
+
+@app.route('/mp3/<id>')
+def mp3Player(id):
+    return send_file('/tmp/cau-'+ str(id) + '.mp3')
+
 
 @app.route('/')
 def index():
