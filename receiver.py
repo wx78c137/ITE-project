@@ -8,6 +8,7 @@ from time import sleep
 from datetime import datetime
 
 tmpNum = ''
+current_link = ''
 t1 = 0
 t2 = 0
 button1 = Button(21)
@@ -58,12 +59,13 @@ def playViLanguage(text, num):
     os.system("mpg321 /home/pi/myProjects/ITE-project/loading.mp3")
     tts = gTTS(text=text, lang='vi')
     print('end gTTS')
-    tts.save('/home/pi/cau-'+ str(num) + '.mp3')
-    os.system("mpg321 /home/pi/cau-" + str(num) + '.mp3' )
+    tts.save('/tmp/cau-'+ str(num) + '.mp3')
+    os.system("mpg321 /tmp/cau-" + str(num) + '.mp3' )
 
 
 def getNewResult(mac_address):
     global tmpNum
+    global current_link
     print('making request to server')
     postRequest = requests.post('http://45.117.169.186:5000/api_1_0/first_data', data = {'mac_address':mac_address})
     print('end server request')
@@ -73,10 +75,8 @@ def getNewResult(mac_address):
     if num == 0:
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     elif link:
-        os.system('aria2c -d /home/pi/ http://45.117.169.186:5000' + link)
-        path = '/home/pi/cau-' + str(num) + '.mp3'
-        os.system('mpg321 '+ path)
-        tmpNum = str(num)
+        os.system("mpg321 http://45.117.169.186:5000" + link)
+        current_link = link
     else:
         result = return_data.get('result')
         text = 'Câu ' + str(num) + ': ' + result
@@ -88,7 +88,10 @@ def getOldResult():
     if tmpNum == '':
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
-        os.system("mpg321 /home/pi/cau-" +str(tmpNum) + '.mp3')
+        try:
+            os.system("mpg321 /tmp/cau-" +str(tmpNum) + '.mp3')
+        except:
+            os.system("mpg321 http://45.117.169.186:5000" + link)
 
 
 def buzzerOn():
