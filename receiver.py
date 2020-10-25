@@ -20,6 +20,7 @@ def set_t1():
     print(t1)
 
 def set_t2():
+    buzzerOn()
     print('set t2')
     global t2
     t2 = datetime.now()
@@ -54,6 +55,7 @@ def userChoice():
 
 def playViLanguage(text):
     print('making request to gTTS')
+    os.system("mpg321 /home/pi/myProjects/ITE-project/loading.mp3")
     tts = gTTS(text=text, lang='vi')
     print('end gTTS')
     tts.save("tmp.mp3")
@@ -61,7 +63,6 @@ def playViLanguage(text):
 
 
 def getNewResult(mac_address):
-    buzzerOn()
     global tmpNum
     print('making request to server')
     postRequest = requests.post('http://45.117.169.186:5000/api_1_0/first_data', data = {'mac_address':mac_address})
@@ -78,7 +79,6 @@ def getNewResult(mac_address):
 
 
 def getOldResult():
-    buzzerOn()
     if tmpNum == '':
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
