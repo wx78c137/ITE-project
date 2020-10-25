@@ -46,7 +46,6 @@ def countDelta():
 def userChoice():
     print('program start')
     sleep(5)
-    os.system("mpg321 /home/pi/myProjects/ITE-project/start.mp3")
     mac_address = get_mac()
     while 1:
         button1.when_pressed = set_t1
@@ -56,7 +55,6 @@ def userChoice():
 
 def playViLanguage(text, num):
     print('making request to gTTS')
-    os.system("mpg321 /home/pi/myProjects/ITE-project/loading.mp3")
     tts = gTTS(text=text, lang='vi')
     print('end gTTS')
     tts.save('/tmp/cau-'+ str(num) + '.mp3')
@@ -89,10 +87,10 @@ def getOldResult():
     if tmpNum == '':
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
-        try:
+        if os.path.exists('/tmp/cau-' +str(tmpNum) + '.mp3'):
             os.system("mpg321 /tmp/cau-" +str(tmpNum) + '.mp3')
-        except:
-            os.system("mpg321 http://45.117.169.186:5000" + link)
+        else:
+            os.system("mpg321 http://45.117.169.186:5000" + current_link)
 
 
 def buzzerOn():
