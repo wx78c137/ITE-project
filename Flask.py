@@ -149,7 +149,7 @@ def createMp3(id):
     name = '/tmp/cau-' + str(result.seq) +'.mp3'
     tts = gTTS(text=text, lang='vi')
     tts.save(name)
-
+    return redirect(url_for('index'))
 
 @app.route('/mp3/<id>')
 def mp3Player(id):
