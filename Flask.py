@@ -29,13 +29,14 @@ class Result(db.Document):
 
 def fakeDb():
     dropDatabase()
-    words = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','None']
+    words = ['Anh','Bê bò','Chó','Dê','Em','Fở','Gà','Heo','I ngắn','Jay','Ka','En lờ','Em Mờ','En Nờ','Ông','None']
     for i in range(40):
         letters = string.ascii_lowercase
         result_str = random.choice(words)
         seq = Result.objects.count()
         seq = seq + 1
         result =Result(result= result_str, seq= seq)
+        link = '/mp3/'+ str(result.seq)
         if result_str != 'None':
             result.link = link
         result.save()
@@ -53,35 +54,35 @@ def dropDatabase():
 # Handle data array
 def data_handle(data):
     if data == '1':
-        cleaned_data = 'A'
+        cleaned_data = 'Anh'
     elif data == '2':
-        cleaned_data = 'B'
+        cleaned_data = 'Bê bò'
     elif data == '3':
-        cleaned_data = 'C'
+        cleaned_data = 'Chó'
     elif data == '4':
-        cleaned_data = 'D'
+        cleaned_data = 'Dê'
     elif data == '5':
-        cleaned_data = 'E'
+        cleaned_data = 'Em'
     elif data == '6':
-        cleaned_data = 'F'
+        cleaned_data = 'Fở'
     elif data == '7':
-        cleaned_data = 'G'
+        cleaned_data = 'Gà'
     elif data == '8':
-        cleaned_data = 'H'
+        cleaned_data = 'Heo'
     elif data == '9':
-        cleaned_data = 'I'
+        cleaned_data = 'I ngắn'
     elif data == '10':
-        cleaned_data = 'J'
+        cleaned_data = 'Jay'
     elif data == '11':
-        cleaned_data = 'K'
+        cleaned_data = 'Ka'
     elif data == '12':
-        cleaned_data = 'L'
+        cleaned_data = 'En Lờ'
     elif data == '13':
-        cleaned_data = 'M'
+        cleaned_data = 'Em mờ'
     elif data == '14':
-        cleaned_data = 'N'
+        cleaned_data = 'En nờ'
     elif data == '15':
-        cleaned_data = 'O'
+        cleaned_data = 'Ông'
     else:
         cleaned_data = 'None'
     return cleaned_data
