@@ -17,7 +17,7 @@ buzzer = LED(16)
 
 
 def getName():
-    f = open('~/name.txt', 'r')
+    f = open('/home/pi/name.txt', 'r')
     data = file.read().replace('\n', '')
     return data
 
