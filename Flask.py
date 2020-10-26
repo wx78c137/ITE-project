@@ -36,7 +36,14 @@ def fakeDb():
         seq = Result.objects.count()
         seq = seq + 1
         result =Result(result= result_str, seq= seq)
+        if result_str != 'None':
+            result.link = link
         result.save()
+        if result_str != 'None':
+            text = 'câu ' + str(result.seq) + ' ' + result.result
+            name = '/tmp/cau-' + str(result.seq) +'.mp3'
+            tts = gTTS(text=text, lang='vi')
+            tts.save(name)
 
 
 def dropDatabase():

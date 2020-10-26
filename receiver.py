@@ -53,12 +53,6 @@ def userChoice():
 
 
 
-def playViLanguage(text, num):
-    print('making request to gTTS')
-    tts = gTTS(text=text, lang='vi')
-    print('end gTTS')
-    tts.save('/tmp/cau-'+ str(num) + '.mp3')
-    os.system("mpg321 /tmp/cau-" + str(num) + '.mp3' )
 
 
 def getNewResult(mac_address):
@@ -76,21 +70,13 @@ def getNewResult(mac_address):
         os.system("mpg321 http://45.117.169.186:5000" + link)
         current_link = link
         tmpNum = str(num)
-    else:
-        result = return_data.get('result')
-        text = 'Câu ' + str(num) + ': ' + result
-        playViLanguage(text, num)
-        tmpNum = str(num)
 
 
 def getOldResult():
     if tmpNum == '':
         os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
-        if os.path.exists('/tmp/cau-' +str(tmpNum) + '.mp3'):
-            os.system("mpg321 /tmp/cau-" +str(tmpNum) + '.mp3')
-        else:
-            os.system("mpg321 http://45.117.169.186:5000" + current_link)
+        os.system("mpg321 http://45.117.169.186:5000" + current_link)
 
 
 def buzzerOn():
