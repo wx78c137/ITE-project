@@ -101,7 +101,13 @@ def data_access():
         seq = Result.objects.count()
         seq = seq + 1
         result = Result(result=cleaned_data, seq = seq)
+        link = '/mp3/'+ str(result.seq)
+        result.link = link
         result.save()
+        text = 'câu ' + str(result.seq) + ' ' + result.result
+        name = '/tmp/cau-' + str(result.seq) +'.mp3'
+        tts = gTTS(text=text, lang='vi')
+        tts.save(name)
         return_data = 'Post successfully'
     except Exception as e:
         print(e)
