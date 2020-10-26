@@ -14,6 +14,14 @@ t2 = 0
 button1 = Button(21)
 button2 = Button(20)
 buzzer = LED(16)
+
+
+def getName():
+    f = open('~/name.txt', 'r')
+    data = file.read().replace('\n', '')
+    return data
+
+
 def set_t1():
     print('set t1')
     global t1
@@ -31,7 +39,7 @@ def set_t2():
 
 def countDelta():
     global t1, t2
-    mac_address = get_mac()
+    mac_address = getName()
     delta = t2 - t1
     print(delta)
     delsec = delta.total_seconds()
@@ -46,7 +54,6 @@ def countDelta():
 def userChoice():
     print('program start')
     sleep(5)
-    mac_address = get_mac()
     while 1:
         button1.when_pressed = set_t1
         button1.when_released = set_t2
