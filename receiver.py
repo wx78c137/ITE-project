@@ -98,7 +98,7 @@ def getOldResult():
         noAnsUrl = '/home/pi/myProjects/ITE-project/noAns.mp3'
         playMp3(noAnsUrl)
     else:
-        playMp3(current_link)
+        playMp3(serverUrl + current_link)
 
 
 def buzzerOn():
