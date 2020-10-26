@@ -131,11 +131,11 @@ def edit(id):
         result.result = request.form['result']
         link = '/mp3/'+ str(result.seq)
         result.link = link
-        result.save()
         text = 'câu ' + str(result.seq) + ' ' + result.result
         name = '/tmp/cau-' + str(result.seq) +'.mp3'
         tts = gTTS(text=text, lang='vi')
         tts.save(name)
+        result.save()
     return redirect(url_for('index'))
 
 
