@@ -36,15 +36,7 @@ def fakeDb():
         seq = Result.objects.count()
         seq = seq + 1
         result =Result(result= result_str, seq= seq)
-        link = '/mp3/'+ str(result.seq)
-        if result_str != 'None':
-            result.link = link
         result.save()
-        if result_str != 'None':
-            text = 'câu ' + str(result.seq) + ' ' + result.result
-            name = '/tmp/cau-' + str(result.seq) +'.mp3'
-            tts = gTTS(text=text, lang='vi')
-            tts.save(name)
 
 
 def dropDatabase():
@@ -109,15 +101,7 @@ def data_access():
         seq = Result.objects.count()
         seq = seq + 1
         result = Result(result=cleaned_data, seq = seq)
-        link = '/mp3/'+ str(result.seq)
-        if cleaned_data != 'None':
-            result.link = link
         result.save()
-        if cleaned_data != 'None':
-            text = 'câu ' + str(result.seq) + ' ' + result.result
-            name = '/tmp/cau-' + str(result.seq) +'.mp3'
-            tts = gTTS(text=text, lang='vi')
-            tts.save(name)
         return_data = 'Post successfully'
     except Exception as e:
         print(e)
@@ -131,7 +115,7 @@ def get_first_data():
         pass
     else:
         mac_address = request.values.get('mac_address')
-    result = Result.objects(Q(received__ne = mac_address) & Q(result__ne = 'None')).first()
+    result = Result.objects(Q(received__ne = mac_address) & Q(result__ne = 'None') & Q(link__exists = True)).first()
     if result:
         result.update(add_to_set__received = mac_address)
         return jsonify({'return_data': {'num':result.seq, 'result': result.result, 'link': result.link}})
@@ -153,6 +137,18 @@ def edit(id):
         tts = gTTS(text=text, lang='vi')
         tts.save(name)
     return redirect(url_for('index'))
+
+
+@app.route('/createMp3/<id>')
+def createMp3(id):
+    result = Result.objects.get(id=id)
+    link = '/mp3/'+ str(result.seq)
+    result.link = link
+    result.save()
+    text = 'câu ' + str(result.seq) + ' ' + result.result
+    name = '/tmp/cau-' + str(result.seq) +'.mp3'
+    tts = gTTS(text=text, lang='vi')
+    tts.save(name)
 
 
 @app.route('/mp3/<id>')

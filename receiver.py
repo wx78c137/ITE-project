@@ -70,8 +70,7 @@ def playMp3(url):
 
 
 def getNewResult(mac_address):
-    global tmpNum
-    global current_link
+    global tmpNum, current_link
     try:
         print('making request to server')
         firstDataUrl = serverUrl + '/api_1_0/first_data'

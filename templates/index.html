@@ -27,7 +27,10 @@
       {% for answer in answers %}
       <tr>
         <td>{{answer.seq}}</td>
-        <div class="pagination-centered">
+        {% if answer.link %}
+        <a href="/createMp3/answer.id">Tạo mp3</a>
+        {% endif %}
+        <div class={% if not answer.link %} "noLink" {% else %} "link" {% endif %}>
           <td>{{answer.result}}</td>
         </div>
         <td>
