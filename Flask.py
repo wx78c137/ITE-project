@@ -144,18 +144,18 @@ def createMp3(id):
     result = Result.objects.get(id=id)
     link = '/mp3/'+ str(result.seq)
     result.link = link
-    result.save()
     text = 'câu ' + str(result.seq) + ' ' + result.result
     name = '/tmp/cau-' + str(result.seq) +'.mp3'
     tts = gTTS(text=text, lang='vi')
     tts.save(name)
+    result.save()
     return redirect(url_for('index'))
 
 @app.route('/mp3/<id>')
 def mp3Player(id):
     return send_file('/tmp/cau-'+ str(id) + '.mp3')
 
-    
+
 @app.route('/mp3/noAns')
 def noAns():
     return send_file('noAns.mp3')
