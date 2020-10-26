@@ -155,6 +155,11 @@ def createMp3(id):
 def mp3Player(id):
     return send_file('/tmp/cau-'+ str(id) + '.mp3')
 
+    
+@app.route('/mp3/noAns')
+def noAns():
+    return send_file('noAns.mp3')
+
 
 @app.route('/')
 def index():

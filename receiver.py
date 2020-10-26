@@ -14,6 +14,7 @@ button1 = Button(21)
 button2 = Button(20)
 buzzer = LED(16)
 serverUrl = 'http://45.117.169.186:5000'
+noAnsUrl = 'http://45.117.169.186:5000/mp3/noAns'
 
 def getName():
     f = open('/home/pi/name.txt', 'r')
@@ -80,7 +81,6 @@ def getNewResult(mac_address):
         num = return_data.get('num')
         link = return_data.get('link')
         if num == 0:
-            noAnsUrl = '/home/pi/myProjects/ITE-project/noAns.mp3'
             playMp3(noAnsUrl)
         elif link:
             mp3Url = serverUrl + link
@@ -94,7 +94,6 @@ def getNewResult(mac_address):
 
 def getOldResult():
     if tmpNum == '':
-        noAnsUrl = '/home/pi/myProjects/ITE-project/noAns.mp3'
         playMp3(noAnsUrl)
     else:
         playMp3(serverUrl + current_link)
