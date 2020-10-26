@@ -46,6 +46,8 @@ def countDelta():
     delsec = delta.total_seconds()
     if delsec < 1:
         getNewResult(mac_address)
+    elif delsec > 5:
+        os.system('sudo reboot')
     else:
         getOldResult()
     t1=0
