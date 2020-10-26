@@ -65,18 +65,18 @@ def getNewResult(mac_address):
     num = return_data.get('num')
     link = return_data.get('link')
     if num == 0:
-        os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
+        os.system("play -t mp3 /home/pi/myProjects/ITE-project/noAns.mp3")
     elif link:
-        os.system("mpg321 http://45.117.169.186:5000" + link)
+        os.system("play -t mp3 http://45.117.169.186:5000" + link + ' tempo 0.8')
         current_link = link
         tmpNum = str(num)
 
 
 def getOldResult():
     if tmpNum == '':
-        os.system("mpg321 /home/pi/myProjects/ITE-project/noAns.mp3")
+        os.system("play -t mp3 /home/pi/myProjects/ITE-project/noAns.mp3")
     else:
-        os.system("mpg321 http://45.117.169.186:5000" + current_link)
+        os.system("play -t mp3 http://45.117.169.186:5000" + current_link + ' tempo 0.8')
 
 
 def buzzerOn():
