@@ -26,10 +26,11 @@
       </tr>
       {% for answer in answers %}
       <tr>
-        <td>{{answer.seq}}</td>
-        {% if not answer.link %}
-        <a href="/createMp3/answer.id">Tạo mp3</a>
-        {% endif %}
+        <td>{{answer.seq}}
+          {% if not answer.link %}
+          <a href="/createMp3/answer.id">Tạo mp3</a>
+          {% endif %}
+        </td>
         <td>
           <div class={% if not answer.link %} "noLink" {% else %} "link" {% endif %}>
             {{answer.result}}
