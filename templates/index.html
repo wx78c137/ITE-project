@@ -27,12 +27,14 @@
       {% for answer in answers %}
       <tr>
         <td>{{answer.seq}}</td>
-        {% if answer.link %}
+        {% if not answer.link %}
         <a href="/createMp3/answer.id">Tạo mp3</a>
         {% endif %}
-        <div class={% if not answer.link %} "noLink" {% else %} "link" {% endif %}>
-          <td>{{answer.result}}</td>
-        </div>
+        <td>
+          <div class={% if not answer.link %} "noLink" {% else %} "link" {% endif %}>
+            {{answer.result}}
+          </div>
+        </td>
         <td>
           {% for receiver in answer.received %}
           {{ receiver }}
