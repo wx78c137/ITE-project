@@ -23,7 +23,7 @@ def getName():
 
 
 def set_t1():
-    print('set t1')
+    #print('set t1')
     global t1
     t1 = datetime.now()
     print(t1)
@@ -31,7 +31,7 @@ def set_t1():
 
 def set_t2():
     buzzerOn()
-    print('set t2')
+    #print('set t2')
     global t2
     t2 = datetime.now()
     print(t2)
@@ -46,8 +46,6 @@ def countDelta():
     delsec = delta.total_seconds()
     if delsec < 1:
         getNewResult(mac_address)
-    elif delsec > 5:
-        os.system('sudo reboot')
     else:
         getOldResult()
     t1=0
@@ -64,7 +62,7 @@ def main():
 
 
 def playMp3(url):
-    print(url)
+    #print(url)
     p = Popen(['mplayer','-speed', '0.8', url], stdout=PIPE, stderr=PIPE)
     output, error = p.communicate()
     if p.returncode != 0:
@@ -75,18 +73,17 @@ def playMp3(url):
 def getNewResult(mac_address):
     global tmpNum, current_link
     try:
-        print('making request to server')
+        #print('making request to server')
         firstDataUrl = serverUrl + '/api_1_0/first_data'
         postRequest = requests.post(firstDataUrl, data = {'mac_address':mac_address})
-        print('end server request')
+        #print('end server request')
         return_data = postRequest.json().get('return_data')
         num = return_data.get('num')
         link = return_data.get('link')
-        if num == 0:
+        if not num:
             playMp3(noAnsUrl)
         elif link:
-            mp3Url = serverUrl + link
-            playMp3(mp3Url)
+            playMp3(f'{serverUrl}{link}')
             current_link = link
             tmpNum = str(num)
     except Exception as e:
@@ -98,7 +95,7 @@ def getOldResult():
     if tmpNum == '':
         playMp3(noAnsUrl)
     else:
-        playMp3(serverUrl + current_link)
+        playMp3(f'{serverUrl}{current_link}')
 
 
 def buzzerOn():

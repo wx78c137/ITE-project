@@ -30,7 +30,7 @@ class Result(db.Document):
 def fakeDb():
     dropDatabase()
     words = ['Anh','Bê bò','Chó','Dê','Em','Fở','Gà','Heo','I ngắn','Jay','Ka','En lờ','Em Mờ','En Nờ','Ông','None']
-    for i in range(40):
+    for i in range(80):
         letters = string.ascii_lowercase
         result_str = random.choice(words)
         seq = Result.objects.count()
