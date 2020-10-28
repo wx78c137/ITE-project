@@ -63,7 +63,7 @@ def main():
 
 def playMp3(url):
     #print(url)
-    p = Popen(['play','-t', 'pulseaudio','-t', 'mp3',url,'tempo','0.8' ], stdout=PIPE, stderr=PIPE)
+    p = Popen(['play','-t', 'mp3',url,'tempo','0.8' ], stdout=PIPE, stderr=PIPE)
     output, error = p.communicate()
     if p.returncode != 0:
         print(" play failed %d %s %s" % (p.returncode, output, error))
