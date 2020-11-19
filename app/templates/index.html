@@ -3,55 +3,62 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
   <meta charset="UTF-8">
-  <title>ITE Group</title>
-
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="{{url_for('static', filename='js/script.js')}}"></script>
 </head>
 
-<body>
-  <div class="container-fluid">
+<body class="result">
+  <h1>
+    <span class="yellow">ITE Group</span>
+  </h1>
 
+  <div>
 
-    <h2 class="banner">ITE Project</h2>
-
-    <table>
-      <tr>
-        <th>Số thứ tự</th>
-        <th>Câu trả lời</th>
-        <th>Máy đã nhận</th>
-        <th></th>
-      </tr>
-      {% for answer in answers %}
-      <tr>
-        <td>{{answer.seq}}
-          {% if not answer.link %}
-          <a href="/createMp3/{{answer.id}}">Tạo mp3</a>
+    <table class="container">
+      <thead>
+        <tr>
+          <th>
+            <h1>Số thứ tự</h1>
+          </th>
+          <th>
+            <h1>Câu trả lời</h1>
+          </th>
+          <th>
+            <h1>Môn</h1>
+          </th>
+          <!-- <th></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        {% for answer in answers %}
+        <tr>
+          {% if answer.seq <= 40%}
+          <td>Câu {{answer.seq}}</td>
+          {% else %}
+          <td>Câu {{answer.seq - 40}}</td>
           {% endif %}
-        </td>
-        <td>
-          <div class={% if not answer.link %} "noLink" {% else %} "link" {% endif %}>
-            {{answer.result}}
-          </div>
-        </td>
-        <td>
-          {% for receiver in answer.received %}
-          {{ receiver }}
-          {% endfor %}
-        </td>
-        <td>
+          <td>{{answer.result}}</td>
+          {% if answer.seq <= 40%}
+          <td>Listening</td>
+          {% else %}
+          <td>Reading</td>
+          {% endif %}
+
+          <!-- <td>
           <form class="form-inline float-right" action="/edit/{{answer.id}}" method="post">
             <div class="form-group">
               <input class="form-control" name="result" aria-describedby="emailHelp" placeholder="Điền đáp án câu {{answer.seq}}" required>
             </div>
             <button type="submit" class="btn btn-outline-secondary" style="margin-left: 10px">Xác nhận</button>
           </form>
-        </td>
+        </td> -->
 
-      </tr>
-      {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
     <div class="clear-data">
       <a href="/clear-data" class="btn btn-outline-danger">Clear Data</a>
@@ -60,7 +67,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </body>
 
 </html>

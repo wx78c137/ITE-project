@@ -89,10 +89,10 @@ void loop() {
     }
 
     else {
-      vibrateLong();
       Serial.println("Long press");
       post_data = String(pressTime);
       post_request(post_data);//gui tra loi len server
+      vibrateLong();
       post_data = "";
       pressTime = 0;
       tick = 0;
