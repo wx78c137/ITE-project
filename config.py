@@ -6,15 +6,15 @@ import os
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # Define the database - we are working with
-MONGODB_SETTINGS = {
-    'host': 'mongodb+srv://vuhoang17891:Vu1781991@cluster0.bknlw.mongodb.net/iteprojects?retryWrites=true&w=majority',
-}
-
 # MONGODB_SETTINGS = {
-#     'db': 'iteprojects',
-#     'host': '127.0.0.1',
-#     'port': 27017
+#     'host': 'mongodb+srv://vuhoang17891:Vu1781991@cluster0.bknlw.mongodb.net/iteprojects?retryWrites=true&w=majority',
 # }
+
+MONGODB_SETTINGS = {
+    'db': 'iteprojects',
+    'host': '127.0.0.1',
+    'port': 27017
+}
 # Application threads. A common general assumption is
 # using 2 per available processor cores - to handle
 # incoming requests using one and performing background
