@@ -68,7 +68,7 @@ def clear_data():
         dropDatabase()
     except Exception as e:
         print(e)
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 #hàm xử lý khi máy phát gửi dữ liệu
 @main.route('/api_1_0/data', methods=['POST'])
