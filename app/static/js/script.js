@@ -11,11 +11,11 @@
 //   });
 // })();
 var socket = io();
-socket.on('connect', function() {
-  socket.emit('onConnect', {
-    data: 'I\'m connected!'
-  });
-});
+// socket.on('connect', function() {
+//   socket.emit('onConnect', {
+//     data: 'I\'m connected!'
+//   });
+// });
 socket.on('newData', function() {
   $.ajax({
     url: '/',

@@ -115,6 +115,6 @@ def resultEdit():
 
 
 #handle socketio
-@socketio.on('onConnect')
-def handle_message(json):
-    print('received message: ' + str(json))
+# @socketio.on('onConnect')
+# def handle_message(json):
+#     print('received message: ' + str(json))
