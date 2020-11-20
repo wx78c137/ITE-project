@@ -10,8 +10,8 @@ app.config.from_object('config')
 
 #Khai báo module
 db = MongoEngine(app)
-socketio = SocketIO(app,cors_allowed_origins="*")
-
+socketio = SocketIO(app)
+socketio.init_app(app, cors_allowed_origins="*")
 
 
 #Khai báo blueprint
